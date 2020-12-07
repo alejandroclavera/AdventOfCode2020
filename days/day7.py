@@ -22,6 +22,21 @@ class Day7(Day):
             bags = self.add_bags(contains, bags)
         return len(bags) - 1
 
+    def add_bags(self, contains, bags_colors):
+        """
+        Añade a la lista de bolsas las bolsas que han de contener alguna bolsa
+        de la lista
+        """
+        for bag in contains:
+            # Si no ha de contener ninguna bolsa se ignora
+            if contains[bag] is None:
+                continue
+            for bag_color in contains[bag]:
+                if bag_color in bags_colors and bag not in bags_colors:
+                    bags_colors.append(bag)
+        return bags_colors
+
+
     def get_contains(self, rulesFile):
         """
         Genera un diccionario que almacena que bolsas que de contener cada bolsa
